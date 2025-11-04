@@ -36,7 +36,7 @@ public class CandidateControllerTest {
                                                     "Computer Science",
                                                     java.util.Set.of(new Skill("Merovingian",
                                                                                 "Merovingian",
-                                                                                SkillCategory.DEV_OPS,
+                                                                                SkillCategory.DEVOPS,
                                                                                 "The best programmer ever 'born'")));
         given()
                 .contentType("application/json")

@@ -4,7 +4,7 @@ public enum SkillCategory
 {
     PROG_LANG,
     DB,
-    DEV_OPS,
+    DEVOPS,
     FRONTEND,
     TESTING,
     DATA,

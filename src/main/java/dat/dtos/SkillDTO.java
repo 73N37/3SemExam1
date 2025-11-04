@@ -24,7 +24,8 @@ public class SkillDTO
 
     private String slug;
 
-    private Set<Candidate> candidates = new HashSet<>();
+
+    public SkillDTO () {}   // Required by Jackson
 
     public
     SkillDTO
@@ -41,18 +42,14 @@ public class SkillDTO
                     java.lang.String slug,
 
                     @org.jetbrains.annotations.NotNull
-                    SkillCategory category,
-
-                    @org.jetbrains.annotations.NotNull
-                    java.util.Set<Candidate> candidates
+                    SkillCategory category
             )
     {
         this.id = id;
         this.name = name;
-        this.description = description;
         this.slug = slug;
         this.category = category;
-        this.candidates = candidates;
+        this.description = description;
     }
 
     public
@@ -67,6 +64,5 @@ public class SkillDTO
         this.description = entity.getDescription();
         this.slug = entity.getSlug();
         this.category = entity.getCategory();
-        this.candidates = entity.getCandidates();
     }
 }

@@ -192,8 +192,8 @@ public class SkillDAO implements IDAO<SkillDTO, Long> {
             return skill != null;
         }
     }
-
-    public
+    
+    public 
     void
     populate
             ()
@@ -205,15 +205,15 @@ public class SkillDAO implements IDAO<SkillDTO, Long> {
             em.createQuery("DELETE FROM Skill").executeUpdate();
 
             // Create sample skills
-            Skill s1 = new Skill("java", "Java", SkillCategory.PROG_LANG,
+            Skill s1 = new Skill("Java", "java", SkillCategory.PROG_LANG,
                     "General-purpose programming language");
-            Skill s2 = new Skill("spring-boot", "Spring Boot", SkillCategory.FRAMEWORK,
+            Skill s2 = new Skill("Spring Boot", "spring-boot", SkillCategory.FRAMEWORK,
                     "Java framework for microservices");
-            Skill s3 = new Skill("postgresql", "PostgreSQL", SkillCategory.DB,
+            Skill s3 = new Skill("PostgreSQL", "postgresql", SkillCategory.DB,
                     "Relational database system");
-            Skill s4 = new Skill("docker", "Docker", SkillCategory.DEV_OPS,
+            Skill s4 = new Skill("Docker", "docker", SkillCategory.DEVOPS,
                     "Container platform");
-            Skill s5 = new Skill("react", "React", SkillCategory.FRONTEND,
+            Skill s5 = new Skill("React", "react", SkillCategory.FRONTEND,
                     "JavaScript UI library");
 
             em.persist(s1);

@@ -74,7 +74,7 @@ class SkillDAOTest {
         SkillDTO created = skillDAO.create(dto);
 
         SkillDTO updateDto = new SkillDTO(created.getId(), skill.getName(), "PostgreSQL Advanced"
-                , "Advanced database management", skill.getCategory(), skill.getCandidates());
+                , "Advanced database management", skill.getCategory());
         SkillDTO updated = skillDAO.update(created.getId(), updateDto);
 
         assertEquals("PostgreSQL Advanced", updated.getDescription());
@@ -96,7 +96,7 @@ class SkillDAOTest {
     @Order(5)
     void testGetAllSkills() {
         skillDAO.create(new SkillDTO(new Skill("Java", "java", SkillCategory.PROG_LANG, "Programming language")));
-        skillDAO.create(new SkillDTO(new Skill("Docker", "docker", SkillCategory.DEV_OPS, "Containerization")));
+        skillDAO.create(new SkillDTO(new Skill("Docker", "docker", SkillCategory.DEVOPS, "Containerization")));
         skillDAO.create(new SkillDTO(new Skill("React", "react", SkillCategory.FRONTEND, "UI library")));
 
         List<SkillDTO> all = skillDAO.readAll();

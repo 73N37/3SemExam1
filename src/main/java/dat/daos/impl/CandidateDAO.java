@@ -1,9 +1,11 @@
 package dat.daos.impl;
 
 
+import dat.Service.SkillStatsService;
 import dat.config.HibernateConfig;
 import dat.daos.IDAO;
 import dat.dtos.CandidateDTO;
+import dat.dtos.SkillStatsDTO;
 import dat.entities.Candidate;
 import dat.entities.Skill;
 import dat.entities.SkillCategory;
@@ -13,6 +15,7 @@ import jakarta.persistence.TypedQuery;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class CandidateDAO implements IDAO<CandidateDTO, Long> {
@@ -46,10 +49,49 @@ public class CandidateDAO implements IDAO<CandidateDTO, Long> {
                     Long id
             )
     {
-        try (EntityManager em = emf.createEntityManager())
-        {
+        try (EntityManager em = emf.createEntityManager()) {
             Candidate candidate = em.find(Candidate.class, id);
-            return candidate != null ? new CandidateDTO(candidate) : null;
+            if (candidate == null) return null;
+
+            CandidateDTO dto = new CandidateDTO(candidate);
+            enrichWithStats(dto);
+            return dto;
+        }
+    }
+
+    private void enrichWithStats(CandidateDTO dto) {
+        try {
+            SkillStatsService service = new SkillStatsService();
+            List<String> slugs = dto.getSkills().stream()
+                    .map(Skill::getSlug)
+                    .collect(Collectors.toList());
+
+            List<SkillStatsDTO> stats = service.getSkillStats(slugs);
+            // Map stats to skills in DTO based on slug matching
+        } catch (Exception e) {
+            // Handle error appropriately
+        }
+    }
+
+
+    public CandidateDTO getTopCandidateByPopularity() {
+        try (EntityManager em = emf.createEntityManager()) {
+            // Fetch all candidates with enriched skills
+            List<CandidateDTO> candidates = readAll();
+
+            return candidates.stream()
+                    .map(candidate -> {
+                        SkillStatsService service = new SkillStatsService();
+                        List<SkillStatsDTO> enriched = service.enrichSkills(candidate.getSkills());
+                        double avgPopularity = enriched.stream()
+                                .mapToDouble(SkillStatsDTO::getPopularityScore)
+                                .average()
+                                .orElse(0.0);
+                        candidate.setAveragePopularityScore(avgPopularity);
+                        return candidate;
+                    })
+                    .max(java.util.Comparator.comparingDouble(CandidateDTO::getAveragePopularityScore))
+                    .orElse(null);
         }
     }
 
@@ -254,7 +296,7 @@ public class CandidateDAO implements IDAO<CandidateDTO, Long> {
             em.createQuery("DELETE FROM Candidate").executeUpdate();
 
             // Create sample candidates
-            Candidate c1 = new Candidate("John Doe", "+45 12345678", "Bachelor in Computer Science", java.util.Set.of(new Skill("Merovingian", "Merovingian", SkillCategory.DEV_OPS, "The best programmer ever 'born'")));
+            Candidate c1 = new Candidate("John Doe", "+45 12345678", "Bachelor in Computer Science", java.util.Set.of(new Skill("Merovingian", "Merovingian", SkillCategory.DEVOPS, "The best programmer ever 'born'")));
             Candidate c2 = new Candidate("Jane Smith", "+45 87654321", "Master in Software Engineering", java.util.Set.of(new Skill("Neo", "Neo", SkillCategory.DATA, "The chosen one")));
             Candidate c3 = new Candidate("Bob Johnson", "+45 11223344", "Bachelor in Data Science", java.util.Set.of(new Skill("Morpheus", "Morpheus", SkillCategory.DB, "The guide")));
 

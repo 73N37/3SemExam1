@@ -32,7 +32,7 @@ public class Skill
     @ManyToMany(mappedBy = "skills", fetch = FetchType.LAZY)
     private Set<Candidate> candidates = new HashSet<>();
 
-    protected Skill (){}    // Required by JPA
+    public Skill (){}    // Required by JPA & Jackson
 
     public
     Skill
