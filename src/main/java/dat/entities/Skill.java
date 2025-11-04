@@ -32,6 +32,15 @@ public class Skill
     @ManyToMany(mappedBy = "skills", fetch = FetchType.LAZY)
     private Set<Candidate> candidates = new HashSet<>();
 
+
+    @lombok.Setter
+    @Transient // Not persisted to database
+    private Long popularityScore;
+
+    @lombok.Setter
+    @Transient  // Not persisted to database
+    private Long averageSalary;
+
     public Skill (){}    // Required by JPA & Jackson
 
     public

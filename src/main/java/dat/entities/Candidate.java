@@ -25,6 +25,9 @@ Candidate {
     @lombok.Setter
     private String education;
 
+
+    private double AveragePopularityScore;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "candidate_skill",
@@ -75,5 +78,14 @@ Candidate {
         this.skills.add(skill);
     }
 
-    // Constructors, getters, setters
+    public
+    void
+    setAveragePopularityScore
+            (
+                    @org.jetbrains.annotations.NotNull
+                    double value
+            )
+    {
+        this.AveragePopularityScore = value;
+    }
 }

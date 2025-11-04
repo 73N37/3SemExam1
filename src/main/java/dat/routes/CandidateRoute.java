@@ -14,9 +14,9 @@ public class CandidateRoute
         return () ->
         {
             get("/populate", candidateController::populate);
-            get("/", candidateController::filterByCategory);
-            post("/", candidateController::create);
-            get("/", candidateController::readAll);
+            get("/filter", candidateController::filterByCategory);
+            post(candidateController::create);
+            get(candidateController::readAll);
             get("/{id}", candidateController::read);
             put("/{id}", candidateController::update);
             delete("/{id}", candidateController::delete);
