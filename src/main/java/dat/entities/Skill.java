@@ -17,6 +17,7 @@ public class Skill
 
     @lombok.Setter
     @Enumerated(EnumType.STRING)
+    @Column(name = "category")
     private SkillCategory category;
 
     @lombok.Setter

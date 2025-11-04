@@ -40,6 +40,10 @@ public class SkillDTO
                     @org.jetbrains.annotations.NotNull
                     java.lang.String slug,
 
+                    @org.jetbrains.annotations.NotNull
+                    SkillCategory category,
+
+                    @org.jetbrains.annotations.NotNull
                     java.util.Set<Candidate> candidates
             )
     {
@@ -47,6 +51,7 @@ public class SkillDTO
         this.name = name;
         this.description = description;
         this.slug = slug;
+        this.category = category;
         this.candidates = candidates;
     }
 
@@ -61,6 +66,7 @@ public class SkillDTO
         this.name = entity.getName();
         this.description = entity.getDescription();
         this.slug = entity.getSlug();
+        this.category = entity.getCategory();
         this.candidates = entity.getCandidates();
     }
 }
