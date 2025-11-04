@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
-public class SkillDAO implements IDAO<SkillDTO, Integer> {
+public class SkillDAO implements IDAO<SkillDTO, Long> {
 
     private static SkillDAO instance;
     private static EntityManagerFactory emf;
@@ -25,7 +25,7 @@ public class SkillDAO implements IDAO<SkillDTO, Integer> {
     }
 
     @Override
-    public SkillDTO read(Integer id) {
+    public SkillDTO read(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             Skill skill = em.find(Skill.class, id);
             return skill != null ? new SkillDTO(skill) : null;
@@ -55,7 +55,7 @@ public class SkillDAO implements IDAO<SkillDTO, Integer> {
     }
 
     @Override
-    public SkillDTO update(Integer id, SkillDTO skillDTO) {
+    public SkillDTO update(Long id, SkillDTO skillDTO) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             Skill skill = em.find(Skill.class, id);
@@ -74,7 +74,7 @@ public class SkillDAO implements IDAO<SkillDTO, Integer> {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             Skill skill = em.find(Skill.class, id);
@@ -86,7 +86,7 @@ public class SkillDAO implements IDAO<SkillDTO, Integer> {
     }
 
     @Override
-    public boolean validatePrimaryKey(Integer id) {
+    public boolean validatePrimaryKey(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             Skill skill = em.find(Skill.class, id);
             return skill != null;

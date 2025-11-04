@@ -28,7 +28,7 @@ public class Skill
     @lombok.Setter
     private String slug;
 
-    @ManyToMany(mappedBy = "skills")
+    @ManyToMany(mappedBy = "skills", fetch = FetchType.LAZY)
     private Set<Candidate> candidates = new HashSet<>();
 
     protected Skill (){}    // Required by JPA
@@ -76,15 +76,4 @@ public class Skill
         candidate.addSkill(this);
     }
 
-}
-
-public enum SkillCategory
-{
-    PROG_LANG,
-    DB,
-    DEV_OPS,
-    FRONTEND,
-    TESTING,
-    DATA,
-    FRAMEWORK;
 }

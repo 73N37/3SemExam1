@@ -1,5 +1,6 @@
 package dat.dtos;
 
+import dat.entities.Candidate;
 import dat.entities.Skill;
 
 @lombok.Getter
@@ -27,4 +28,17 @@ public class CandidateDTO
         this.skills = skills;
     }
 
+
+    public
+    CandidateDTO
+            (
+                    Candidate entity
+            )
+    {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.phone = entity.getPhone();
+        this.education= entity.getEducation();
+        this.skills = entity.getSkills();
+    }
 }

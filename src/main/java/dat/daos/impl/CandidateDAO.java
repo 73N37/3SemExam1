@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
-public class CandidateDAO implements IDAO<CandidateDTO, Integer> {
+public class CandidateDAO implements IDAO<CandidateDTO, Long> {
 
     private static CandidateDAO instance;
     private static EntityManagerFactory emf;
@@ -28,7 +28,7 @@ public class CandidateDAO implements IDAO<CandidateDTO, Integer> {
     }
 
     @Override
-    public CandidateDTO read(Integer id) {
+    public CandidateDTO read(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             Candidate candidate = em.find(Candidate.class, id);
             return candidate != null ? new CandidateDTO(candidate) : null;
@@ -58,7 +58,7 @@ public class CandidateDAO implements IDAO<CandidateDTO, Integer> {
     }
 
     @Override
-    public CandidateDTO update(Integer id, CandidateDTO candidateDTO) {
+    public CandidateDTO update(Long id, CandidateDTO candidateDTO) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             Candidate candidate = em.find(Candidate.class, id);
@@ -76,7 +76,7 @@ public class CandidateDAO implements IDAO<CandidateDTO, Integer> {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             Candidate candidate = em.find(Candidate.class, id);
@@ -88,7 +88,7 @@ public class CandidateDAO implements IDAO<CandidateDTO, Integer> {
     }
 
     @Override
-    public boolean validatePrimaryKey(Integer id) {
+    public boolean validatePrimaryKey(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             Candidate candidate = em.find(Candidate.class, id);
             return candidate != null;
@@ -96,7 +96,7 @@ public class CandidateDAO implements IDAO<CandidateDTO, Integer> {
     }
 
     // US-3: Link skill to candidate
-    public CandidateDTO addSkillToCandidate(Integer candidateId, Integer skillId) {
+    public CandidateDTO addSkillToCandidate(Long candidateId, Long skillId) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             Candidate candidate = em.find(Candidate.class, candidateId);

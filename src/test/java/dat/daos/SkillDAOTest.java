@@ -1,6 +1,8 @@
 package dat.daos;
 
 import dat.config.HibernateConfig;
+import dat.daos.impl.SkillDAO;
+import dat.dtos.SkillDTO;
 import dat.entities.Skill;
 import dat.entities.SkillCategory;
 import jakarta.persistence.EntityManager;
@@ -41,7 +43,7 @@ class SkillDAOTest {
     @Test
     void testCreateSkill() {
         Skill skill = new Skill("Python", "python", SkillCategory.PROG_LANG, "Programming language");
-        Skill created = skillDAO.create(skill);
+        SkillDTO created = skillDAO.create(new SkillDTO(skill));
 
         assertNotNull(created.getId());
         assertEquals("Python", created.getName());
@@ -50,19 +52,19 @@ class SkillDAOTest {
     @Test
     void testReadSkill() {
         Skill skill = new Skill("Docker", "docker", SkillCategory.DEV_OPS, "Containerization");
-        Skill created = skillDAO.create(skill);
+        SkillDTO created = skillDAO.create(new SkillDTO(skill));
 
-        Skill found = skillDAO.read(created.getId());
+        SkillDTO found = skillDAO.read(created.getId());
         assertNotNull(found);
         assertEquals(created.getId(), found.getId());
     }
 
     @Test
     void testGetAllSkills() {
-        skillDAO.create(new Skill("Java", "java", SkillCategory.PROG_LANG, "Language"));
-        skillDAO.create(new Skill("React", "react", SkillCategory.FRONTEND, "Framework"));
+        skillDAO.create(new SkillDTO(new Skill("Java", "java", SkillCategory.PROG_LANG, "Language")));
+        skillDAO.create(new SkillDTO(new Skill("React", "react", SkillCategory.FRONTEND, "Framework")));
 
-        List<Skill> all = skillDAO.getAll();
+        List<SkillDTO> all = skillDAO.readAll();
         assertEquals(2, all.size());
     }
 }

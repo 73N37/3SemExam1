@@ -1,7 +1,9 @@
 package dat.config;
 
+import dat.entities.Candidate;
 import dat.entities.Hotel;
 import dat.entities.Room;
+import dat.entities.Skill;
 import dat.security.entities.Role;
 import dat.security.entities.User;
 import dat.utils.Utils;
@@ -47,6 +49,8 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Room.class);
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Role.class);
+        configuration.addAnnotatedClass(Candidate.class);
+        configuration.addAnnotatedClass(Skill.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest) {
