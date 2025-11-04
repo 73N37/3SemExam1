@@ -1,0 +1,140 @@
+@startuml
+
+enum SkillCategory {
+  PROG_LANG
+  DB
+  DEVOPS
+  FRONTEND
+  TESTING
+  DATA
+  FRAMEWORK
+}
+
+class Candidate {
+  - Long id
+  - String name
+  - String phone
+  - String education
+  - Set<CandidateSkill> candidateSkills
+  + getId(): Long
+  + getName(): String
+  + getPhone(): String
+  + getEducation(): String
+  + getCandidateSkills(): Set<CandidateSkill>
+}
+
+class Skill {
+  - Long id
+  - String name
+  - String slug
+  - SkillCategory category
+  - String description
+  - Set<CandidateSkill> candidateSkills
+  + getId(): Long
+  + getName(): String
+  + getSlug(): String
+  + getCategory(): SkillCategory
+  + getDescription(): String
+}
+
+class CandidateSkill {
+  - Long candidateId
+  - Long skillId
+  - Candidate candidate
+  - Skill skill
+}
+
+class CandidateDTO {
+  - Long id
+  - String name
+  - String phone
+  - String education
+  - Set<SkillDTO> skills
+}
+
+class SkillDTO {
+  - Long id
+  - String name
+  - String slug
+  - String category
+  - String description
+  - Integer popularityScore
+  - Integer averageSalary
+}
+
+class SkillStatsDTO {
+  - String id
+  - String slug
+  - String name
+  - String categoryKey
+  - String description
+  - Integer popularityScore
+  - Integer averageSalary
+  - ZonedDateTime updatedAt
+}
+
+interface CandidateDAO {
+  + create(Candidate): Candidate
+  + getById(Long): Candidate
+  + getAll(): List<Candidate>
+  + update(Candidate): Candidate
+  + delete(Long): void
+  + linkSkillToCandidate(Long, Long): void
+  + getCandidatesByCategory(SkillCategory): List<Candidate>
+}
+
+interface SkillDAO {
+  + create(Skill): Skill
+  + getById(Long): Skill
+  + getAll(): List<Skill>
+}
+
+class CandidateController {
+  - CandidateDAO candidateDAO
+  - SkillStatsService skillStatsService
+  + getAllCandidates(Context): void
+  + getCandidateById(Context): void
+  + createCandidate(Context): void
+  + updateCandidate(Context): void
+  + deleteCandidate(Context): void
+  + linkSkill(Context): void
+}
+
+class SkillStatsService {
+  - String apiUrl
+  + enrichCandidateWithStats(CandidateDTO): CandidateDTO
+}
+
+class ReportController {
+  - CandidateDAO candidateDAO
+  - SkillStatsService skillStatsService
+  + getTopCandidateByPopularity(Context): void
+}
+
+class SecurityController {
+  + login(Context): void
+  + register(Context): void
+}
+
+Candidate "1" -- "*" CandidateSkill
+Skill "1" -- "*" CandidateSkill
+CandidateSkill "*" -- "1" Candidate
+CandidateSkill "*" -- "1" Skill
+
+Skill --> SkillCategory
+
+CandidateDAO ..> Candidate
+SkillDAO ..> Skill
+
+CandidateController --> CandidateDAO
+CandidateController --> SkillStatsService
+CandidateController ..> CandidateDTO
+CandidateController ..> SkillDTO
+
+ReportController --> CandidateDAO
+ReportController --> SkillStatsService
+
+SkillStatsService ..> SkillStatsDTO
+SkillStatsService ..> SkillDTO
+
+@enduml

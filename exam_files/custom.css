@@ -1,0 +1,131 @@
+/* Hugo custom css by Lyngby DAT team */
+
+/* Match Geekdoc style, but add horizontal lines between rows */
+table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+
+thead tr {
+  border-bottom: 2px solid var(--gdoc-border-color, #ccc) !important; /* header underline */
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--gdoc-border-color, #ccc) !important; /* horizontal row lines */
+}
+
+th,
+td {
+  padding: 0.6em 0.8em !important;
+  text-align: left !important;
+  vertical-align: top !important;
+}
+
+/* Optional: zebra striping */
+tbody tr:nth-child(even) {
+  background-color: var(--gdoc-background-secondary, #f9f9f9) !important;
+}
+
+/* Vertical lines: add borders to table cells */
+.gdoc-markdown th,
+.gdoc-markdown td {
+  border-left: 1px solid var(--gdoc-border-color, #ccc) !important;
+  border-right: 1px solid var(--gdoc-border-color, #ccc) !important;
+}
+
+/* Optional: outer border so the table has a frame */
+.gdoc-markdown table {
+  border: 1px solid var(--gdoc-border-color, #ccc) !important;
+  border-collapse: collapse !important;
+}
+
+
+/* You can add custom styles here. */
+
+:root {
+  --header-background: #e8d285 !important;
+  --footer-background: #d0ba6c !important;
+  --header-font-color: #0038A8 !important;
+:
+}
+
+.gdoc-brand__img {
+  margin-right: 2rem;
+  width: auto;
+  height: 2rem;
+}
+
+.gdoc-brand__title {
+  margin-right: 1rem;
+  width: auto;
+  height: 2rem;
+  padding-top: 2px;
+}
+
+/* Half-width responsive images */
+.half {
+  display: block;
+  margin: 2rem auto; /* Center horizontally + space above/below */
+  width: 50%;
+  max-width: 100%; /* Prevent overflow on small screens */
+  height: auto;
+}
+
+.half-left {
+  display: block;
+  margin-top: 2rem; /* Center horizontally + space above/below */
+  width: 50%;
+  max-width: 100%; /* Prevent overflow on small screens */
+  height: auto;
+}
+
+.half-right {
+  display: block;
+  float: right;        /* Pushes the image to the right */
+  margin: 0rem 0 2rem 2rem; /* Top/Right/Bottom/Left spacing */
+  width: 50%;
+  max-width: 100%;     /* Prevent overflow on small screens */
+  height: auto;
+}
+
+.twothird {
+  display: block;
+  margin: 2rem auto; /* Center horizontally + space above/below */
+  width: 67%;
+  max-width: 100%; /* Prevent overflow on small screens */
+  height: auto;
+}
+
+/* Third-width responsive images */
+.third {
+  display: block;
+  margin: 2rem auto; /* Center horizontally + space above/below */
+  width: 33%;
+  max-width: 100%; /* Prevent overflow on small screens */
+  height: auto;
+}
+
+/* Third-width responsive images */
+.fourth {
+  display: block;
+  margin: 2rem auto; /* Center horizontally + space above/below */
+  width: 25%;
+  max-width: 100%; /* Prevent overflow on small screens */
+  height: auto;
+}
+
+.fourth-right {
+  display: block;
+  float: right;        /* Pushes the image to the right */
+  margin: 0rem 0 2rem 2rem; /* Top/Right/Bottom/Left spacing */
+  width: 25%;
+  max-width: 100%;     /* Prevent overflow on small screens */
+  height: auto;
+}
+
+@media screen and (max-width: 659px) {
+  .gdoc-brand__title {
+    padding-top: 4px;
+  }
+}
+
