@@ -192,4 +192,37 @@ public class SkillDAO implements IDAO<SkillDTO, Long> {
             return skill != null;
         }
     }
+
+    public
+    void
+    populate
+            ()
+    {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Clear existing data
+            em.createQuery("DELETE FROM Skill").executeUpdate();
+
+            // Create sample skills
+            Skill s1 = new Skill("java", "Java", SkillCategory.PROG_LANG,
+                    "General-purpose programming language");
+            Skill s2 = new Skill("spring-boot", "Spring Boot", SkillCategory.FRAMEWORK,
+                    "Java framework for microservices");
+            Skill s3 = new Skill("postgresql", "PostgreSQL", SkillCategory.DB,
+                    "Relational database system");
+            Skill s4 = new Skill("docker", "Docker", SkillCategory.DEV_OPS,
+                    "Container platform");
+            Skill s5 = new Skill("react", "React", SkillCategory.FRONTEND,
+                    "JavaScript UI library");
+
+            em.persist(s1);
+            em.persist(s2);
+            em.persist(s3);
+            em.persist(s4);
+            em.persist(s5);
+
+            em.getTransaction().commit();
+        }
+    }
 }

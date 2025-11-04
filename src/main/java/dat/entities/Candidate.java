@@ -38,7 +38,6 @@ Candidate {
     public
     Candidate
             (
-                    Long id,
                     java.lang.String name,
                     java.lang.String phone,
                     java.lang.String education,

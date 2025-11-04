@@ -4,15 +4,19 @@ import io.javalin.apibuilder.EndpointGroup;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
-public class Routes {
+public class Routes
+{
 
-    private final HotelRoute hotelRoute = new HotelRoute();
-    private final RoomRoute roomRoute = new RoomRoute();
+    private final SkillRoute        skillRoute      = new SkillRoute();
+    private final CandidateRoute    candidateRoute  = new CandidateRoute();
 
-    public EndpointGroup getRoutes() {
-        return () -> {
-                path("/hotels", hotelRoute.getRoutes());
-                path("/rooms", roomRoute.getRoutes());
+
+    public EndpointGroup getRoutes()
+    {
+        return () ->
+        {
+                path("/skills",     skillRoute.getRoutes());
+                path("candidates",  candidateRoute.getRoutes());
         };
     }
 }
