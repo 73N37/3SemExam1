@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.dtos.SkillDTO;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -32,7 +33,8 @@ public class Skill
 
     protected Skill (){}    // Required by JPA
 
-    public Skill
+    public
+    Skill
             (
                     @org.jetbrains.annotations.NotNull
                     java.lang.String name,
@@ -43,6 +45,7 @@ public class Skill
                     @org.jetbrains.annotations.NotNull
                     dat.entities.SkillCategory category,
 
+                    @org.jetbrains.annotations.NotNull
                     java.lang.String description
 
             )
@@ -53,6 +56,20 @@ public class Skill
         this.description = description;
     }
 
+    public
+    Skill
+            (
+                    @org.jetbrains.annotations.NotNull
+                    SkillDTO dto
+            )
+    {
+        if (dto.getId() != null) this.id = dto.getId();
+        this.name = dto.getName();
+        this.slug = dto.getSlug();
+        this.description = dto.getDescription();
+        this.category = dto.getCategory();
+    }
+
     public void addCandidate(Candidate candidate)
     {
         candidates.add(candidate);
@@ -61,7 +78,7 @@ public class Skill
 
 }
 
-enum SkillCategory
+public enum SkillCategory
 {
     PROG_LANG,
     DB,
