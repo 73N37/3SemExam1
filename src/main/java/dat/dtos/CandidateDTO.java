@@ -1,5 +1,6 @@
 package dat.dtos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dat.entities.Candidate;
 import dat.entities.Skill;
@@ -51,15 +52,25 @@ public class CandidateDTO
     }
 
 
-    public
-    CandidateDTO
-            (
+    @JsonCreator
+    public CandidateDTO(
+                    @JsonProperty("id")
                     Long                                id,
+
+                    @JsonProperty("name")
                     String                              name,
+
+                    @JsonProperty("phone")
                     String                              phone,
+
+                    @JsonProperty("education")
                     String                              education,
+
+                    @JsonProperty("skills")
                     Set<Skill>                          skills,
-                    double                              averagePopularityScore
+
+                    @JsonProperty("avgPopularityScore")
+                    double                              avgPopularityScore
     )
     {
                     this.id                     =       id;
@@ -67,6 +78,6 @@ public class CandidateDTO
                     this.phone                  =       phone;
                     this.education              =       education;
                     this.skills                 =       skills;
-                    this.avgPopularityScore     =       averagePopularityScore;
+                    this.avgPopularityScore     =       avgPopularityScore;
     }
 }
